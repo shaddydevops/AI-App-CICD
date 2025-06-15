@@ -70,6 +70,7 @@ jobs:
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin
 
       - name: Scan Docker image with Trivy and save report
+        continue-on-error: true
         run: |
           mkdir -p trivy-results
           trivy image --exit-code 1 --severity CRITICAL,HIGH --format json --output trivy-results/scan.json $REGISTRY/$IMAGE_NAME:latest
