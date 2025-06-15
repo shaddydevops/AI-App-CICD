@@ -68,7 +68,7 @@ jobs:
 
 
   push:
-    needs: build
+    needs: scan
     runs-on: self-hosted
 
     steps:
