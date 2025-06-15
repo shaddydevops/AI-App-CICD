@@ -50,6 +50,23 @@ jobs:
         run: |
           docker buildx build --tag $REGISTRY/$IMAGE_NAME:latest --load .
 
+  scan:
+    needs: build
+    runs-on: self-hosted
+
+    steps:
+      - name: Install Trivy
+        run: |
+          sudo apt-get update
+          sudo apt-get install wget -y
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.51.1_Linux-64bit.deb
+          sudo dpkg -i trivy_0.51.1_Linux-64bit.deb
+
+      - name: Scan Docker image with Trivy
+        run: |
+          trivy image --exit-code 1 --severity CRITICAL,HIGH $REGISTRY/$IMAGE_NAME:latest
+
+
   push:
     needs: build
     runs-on: self-hosted
