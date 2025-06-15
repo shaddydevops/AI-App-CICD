@@ -75,7 +75,7 @@ jobs:
           trivy image --exit-code 1 --severity CRITICAL,HIGH --format json --output trivy-results/scan.json $REGISTRY/$IMAGE_NAME:latest
 
       - name: Upload Trivy scan report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: trivy-report
           path: trivy-results/scan.json
