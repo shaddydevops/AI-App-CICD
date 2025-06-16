@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: streamlit
-        image: docker.io/${DOCKER_USER}/ai-app-cicd:latest
+        image: docker.io/shaddydevops/ai-app-cicd:latest
         ports:
         - containerPort: 8501
 
